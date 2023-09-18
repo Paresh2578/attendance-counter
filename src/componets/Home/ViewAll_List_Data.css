@@ -1,0 +1,40 @@
+
+.List_Data_main{
+    margin: 1rem;
+    /* width: auto; */
+    height: auto;
+    display: flex;
+    background-color: #FFF;
+}
+
+.List_Data_main :hover{
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+
+
+.samester{
+    width: 5%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+.samester_number{
+    background-color: rgb(207, 209, 193);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+.OtherData{
+    width: 90%;
+    height: auto;
+    margin-left: 1rem;
+}
