@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React , {useState} from 'react';
 
 //mui
 import { styled  , Dialog ,  DialogActions ,  IconButton } from '@mui/material';
@@ -20,7 +20,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function Detail_page({open , setOpen , data}) {
-  const [copy_btn , setCopy_btn] = React.useState(true);
+  const [copy_btn , setCopy_btn] = useState(true);
 
   const handleClose = () => {
     setOpen(false);

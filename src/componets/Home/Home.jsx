@@ -21,7 +21,7 @@ export default function Home() {
   ]
 
   const [data , setData] = useState(arr);
-  const [open_addData , setOpen_addData] = useState(true);
+  const [open_addData , setOpen_addData] = useState(false);
 
   return (
     <>

@@ -22,9 +22,14 @@ body{
 /* btn-style */
 .btnStyle{
     background: linear-gradient(90deg, rgba(95,185,224,1) 0%, rgba(107,131,124,1) 100%);
-    border: none;
-    color: rgb(255, 240, 244);
+}
 
+.backBtn{
+    border: none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.backBtn:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .dilitBtnStyle{
@@ -33,7 +38,9 @@ body{
 
 .btnStyle:hover{
     /* box-shadow: 3px 2px 6px 2.2px hotpink; */
-    box-shadow: 0 4px 8px 0 hotpink, 0 6px 20px 0 hotpink;
+    /* box-shadow: 0 4px 8px 0 hotpink, 0 6px 20px 0 hotpink; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
 
 }
 
