@@ -1,0 +1,230 @@
+body{
+    background-color: #f2f2f2;
+}
+
+/* count attends  */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* NAVBAR */
+
+#P_N_Btn{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+
+/* btn-style */
+.btnStyle{
+    background: linear-gradient(90deg, rgba(95,185,224,1) 0%, rgba(107,131,124,1) 100%);
+}
+
+.backBtn{
+    border: none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.backBtn:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.dilitBtnStyle{
+    background: linear-gradient(90deg, rgba(224,177,95,1) 0%, rgba(204,32,32,1) 100%);
+}
+
+.btnStyle:hover{
+    /* box-shadow: 3px 2px 6px 2.2px hotpink; */
+    /* box-shadow: 0 4px 8px 0 hotpink, 0 6px 20px 0 hotpink; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+
+}
+
+
+/* word wrap */
+#absent{
+    word-wrap: break-word;
+}
+
+#displyData_Table{
+    overflow-x: scroll;
+    display: none;
+}
+
+/* search bar  */
+
+.search_bar{
+    border: none;
+}
+
+.search_bar:focus{
+    outline: none;
+}
+
+/* empty page */
+/* body {
+    background: #ebedf2;
+    font-family: "Poppins", sans-serif;
+  } */
+  
+  body {
+    background: #ebedf2;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .empty-state {
+    width: 750px;
+    margin: 40px auto;
+    background: #ffffff;
+    box-shadow: 1px 2px 10px #e1e3ec;
+    border-radius: 4px;
+  
+    &__content {
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+  
+      .empty-state__icon {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        border-radius: 200px;
+        justify-content: center;
+        background-color: #f7fafc;
+        box-shadow: 0px 2px 1px #e1e3ec;
+  
+        img {
+          width: 170px;
+        }
+      }
+  
+      .empty-state__message {
+        color: #38a169;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-top: 0.85rem;
+      }
+  
+      .empty-state__help {
+        color: #a2a5b9;
+        font-size: 0.875rem;
+      }
+    }
+  }
+  
+  .credit {
+    color: #A2A5B9;
+    font-size: .75rem;
+    text-align: center;
+    
+    a {
+      color: #444;
+    }
+  }
+
+  /* auth  */
+  .Authentication_body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=4000&q=80");
+    background-position: center;
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    color: #fff;
+  }
+  
+  h1 {
+    margin-bottom: 3rem;
+  }
+  
+  .login-form {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 0.4rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    min-width: 260px;
+  }
+  
+  .login-input-container {
+    margin-top: 2rem;
+  }
+
+
+  
+  /* detaile page */
+  .child_style{
+    font-family: 'PT Sans', sans-serif;
+  }
+  
+  
+
+  /* count_attendes */
+
+  .RollNum{
+    margin-right: 2rem;
+  }
+
+  .title-attendans{
+    font-size: 1.8rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .num_title{
+    
+  }
+
+
+  @media only screen and (max-width: 575px) {
+    .count_attendes_main{
+      margin: 6rem 1rem 1rem 1rem;
+   }
+ }
+
+  @media only screen and (max-width: 530px) {
+    .title-attendans{
+      font-size: 1.5rem;
+      /* padding-bottom: 1.5rem; */
+    }
+ }
+  
+  @media only screen and (max-width: 450px) {
+    .count_attendes_main{
+      margin: 6rem 0.5rem 0.5rem 0.5rem;
+      padding: 0px;
+   }
+
+  }
+
+  @media only screen and (max-width: 450px) {
+      .title-attendans{
+      font-size: 1.2rem;
+    }
+
+  
+ }
+
+  @media only screen and (max-width: 310px) {
+    .RollNum{
+      margin-right: 1rem;
+    }
+ }
+
+  @media only screen and (max-width: 285px) {
+    .RollNum{
+      margin-right: 0.5rem;
+    }
+ }
+  

@@ -1,0 +1,77 @@
+
+.List_Data_main{
+    margin: 1rem;
+    /* width: auto; */
+    height: auto;
+    display: flex;
+    background-color: #FFF;
+    padding: 1rem;
+}
+
+.List_Data_main :hover{
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+
+
+/* .samester{
+    width: 5%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+   
+} */
+/* 
+.samester_number{
+    background-color: rgb(207, 209, 193);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    /* overflow: hidden; */
+/* } */ 
+
+.subjectName{
+    font-family: 'Mooli', sans-serif;
+}
+
+.classNam{
+    font-family: 'PT Sans', sans-serif;
+    font-size: 15px;
+    color :#A9A9A9
+}
+
+
+
+
+.OtherData{
+    width: 100%;
+    height: auto;
+    margin-left: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.overflow-text{
+    
+}
+
+
+@media only screen and (max-width: 450px) {
+     .List_Data_main{
+        padding: 0.5rem;
+    }
+  }
+
+@media only screen and (max-width: 350px) {
+    .List_Data_main{
+        padding: 0.5rem 0rem;
+    }
+  }
+
