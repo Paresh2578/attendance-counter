@@ -14,6 +14,7 @@ import Header from '../../Header/Header'
 //function
 import {update_database} from '../../../util/update_database'
 import {formetTime} from '../../../util/FormentTime'
+import {SweetAlrt} from '../../../util/SweetAlrt'
 
 
 //mui
@@ -23,14 +24,14 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 //main function
 export default function Count_attendes() {
-  const {semester , subject ,className , date , startRoll } = useParams();
+  const {semester , subject ,className , date , startRoll ,topic } = useParams();
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const action = bindActionCreators(dataActions , dispatch)
 
   //all useState
-  const [data , setData] = useState({_id : Date.now() , semester : semester , subject : subject  ,className : className , date :date , absentNum : [] , presentNum : [] , time : formetTime(new Date())})
+  const [data , setData] = useState({_id : Date.now() , semester : semester , subject : subject  ,className : className , date :date , absentNum : [] , presentNum : [] , time : formetTime(new Date()) , topic :topic})
   const [roll , setRoll] = useState(parseInt(startRoll));
   const [copy_btn , setCopy_btn] = useState({absentNum_Copy : true , presentNum_Copy : true});
 
@@ -55,7 +56,6 @@ export default function Count_attendes() {
 
     data.presentNum.push(roll);
     setData({...data , presentNum : data.presentNum})
-    console.log(data.presentNum)
 
     let changeDateForment = data.date.replace('-', '/');
     changeDateForment = changeDateForment.replace('-', '/');
@@ -69,7 +69,6 @@ export default function Count_attendes() {
     
     data.absentNum.push(roll);
     setData({...data , absentNum : data.absentNum})
-    console.log(data.absentNum)
   }
 
   //handle One Back number
@@ -105,9 +104,10 @@ export default function Count_attendes() {
      Redux_data = [...Redux_data , data];
       
      if(update_database(Redux_data)){
+      SweetAlrt("add data" , "success");
         navigate('/')
      }else{
-       console.log('updae data error') ;
+      SweetAlrt("add data" , "error");
      }
      
      
@@ -117,9 +117,26 @@ export default function Count_attendes() {
   }
 
   const handle_cancle = ()=>{
-    console.log('cancle')
     navigate('/');
   }
+
+   ////find scrren width
+   const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+  ]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth]);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
 
   return (
     <> 
@@ -128,17 +145,17 @@ export default function Count_attendes() {
        <div className='count_attendes_main' style={{marginTop : '6rem' }}>
           <div className="container border-0 rounded text-center mt-5 pt-2 pb-2 shadow" style={{backgroundColor :'#fff'}} >
              <div className="row  titleFontFamily title-attendans">
-                 <div className="col">
+                 <div className="col subjectName">
                     Start Attendance Semester - '<span  className="text-success">{semester}</span>' , Subject - '<span id="Subject_Name_Header" className="text-success">{subject}</span>' and ClassName - '<span id="classNameNameHeader" className="text-success">{className}</span>'
                  </div>
             </div>
          <div id="P_N_Btn">
-            <div id="disply-Num" className="fs-1 mb-2  RollNum">{roll}</div>
-            <div><Button  type="button" style={{color : '#FFF'}} className=" btn mb-2 me-3 border-0  btnStyle"  onClick={handle_presentNum} >Present</Button></div>
-            <div><Button type="button"  style={{color : '#FFF'}} className=" btn mb-2 me-3  border-0 dilitBtnStyle btnStyle" onClick={handle_absentNum} >Absent</Button></div>
+            <div id="disply-Num" className="fs-1 mb-2  RollNum subjectName">{roll}</div>
+            <div><Button size={windowSize[0] < 650 ? "small" : ''} type="button" style={{color : '#FFF'}} className=" btn mb-2 me-3 border-0  btnStyle"  onClick={handle_presentNum} >Present</Button></div>
+            <div><Button size={windowSize[0] < 650 ? "small" : ''} type="button"  style={{color : '#FFF'}} className=" btn mb-2 me-3  border-0 dilitBtnStyle btnStyle" onClick={handle_absentNum} >Absent</Button></div>
         </div>
         <div>
-           <Button type="button" style={{color : '#FFF' , backgroundColor:'#0d6efd'}} className=" btn mb-2 mt-3 me-3 border-0  backBtn" onClick={handle_BackNum} disabled= {roll <= startRoll ? true : false}>back to One number</Button>
+           <Button size={windowSize[0] < 650 ? "small" : ''} type="button" style={{color : '#FFF' , backgroundColor:'#0d6efd'}} className=" btn mb-2 mt-3 me-3 border-0  backBtn" onClick={handle_BackNum} disabled= {roll <= startRoll ? true : false}>back to One number</Button>
         </div>
        </div>
      </div>
@@ -147,8 +164,8 @@ export default function Count_attendes() {
      {/* saveData or cancle data part */}
 
      <div id='P_N_Btn' className='mt-5'>
-           <div><Button  type="button" variant='contained' color='success' className=" btn mb-2 me-3 border-0  "  onClick={handle_save} >Save</Button></div>
-           <div><Button type="button" variant='contained' color='error' className=" btn mb-2 me-3  border-0 " onClick={handle_cancle} >Cancle</Button></div>
+           <div><Button size={windowSize[0] < 650 ? "small" : ''} type="button" variant='contained' color='success' className=" btn mb-2 me-3 border-0  "  onClick={handle_save} >Save</Button></div>
+           <div><Button size={windowSize[0] < 650 ? "small" : ''} type="button" variant='contained' color='error' className=" btn mb-2 me-3  border-0 " onClick={handle_cancle} >Cancle</Button></div>
      </div>
      
      
@@ -158,19 +175,19 @@ export default function Count_attendes() {
       {
         data.absentNum.length != 0
         ?
-        <div style={{marginTop : '0rem' , overflow:'hidden'}}>
+        <div className='viewData_main_box'  style={{margin : '2rem 0.5rem'}}>
           <div className='container border-0 rounded text-center mt-5 shadow ' style={{backgroundColor :'#fff'}}>
-               <div className='row pt-3'>
-                  <div className='col-2 h4'>Absent Num : </div>
-                  <div className='col' style={{fontSize :'20px'}}>
+               <div className='row pt-3 pb-2'>
+                  <div className='col-2 num child_style'>A Num : </div>
+                  <div className='col viewData subjectName'>
                     {data.absentNum && data.absentNum.map((n)=>`${n} ,`)}
                  </div>
                  {
                   data.absentNum.length != 0 
                   ?
-                  <div className='col-1'>
-                     <IconButton onClick={()=>CopyData('Absent Num' , data.absentNum, 'absent' )} color ="primary">
-                        {copy_btn.absentNum_Copy ? <ContentCopyIcon/> : <CheckCircleIcon/>}
+                  <div className='col-1 copyBtn' >
+                     <IconButton size={windowSize[0] < 650 ? "small" : ''} onClick={()=>CopyData('Absent Num' , data.absentNum, 'absent' )} color ="primary">
+                        {copy_btn.absentNum_Copy ? <ContentCopyIcon fontSize={windowSize[0] < 650 ? "" : ''}/> : <CheckCircleIcon fontSize=''/>}
                     </IconButton>
                   </div>
                   :''
@@ -187,11 +204,11 @@ export default function Count_attendes() {
       {
         data.presentNum.length != 0 
         ?
-        <div style={{marginTop : '0rem' , marginBottom:'2rem'}}>
+        <div className='viewData_main_box'  style={{margin : '2rem 0.5rem'}}>
           <div className='container border-0 rounded text-center mt-5 shadow' style={{backgroundColor :'#fff'}}>
                <div className='row pt-3 pb-2'>
-                  <div className='col-2 h4'>P Num : </div>
-                  <div className='col' style={{fontSize :'20px'}}>
+                  <div className='col-2 num child_style'>P Num : </div>
+                  <div className='col viewData subjectName'>
                     {
                       data.presentNum && data.presentNum.map((n)=>`${n} ,`)
                     }
@@ -199,9 +216,9 @@ export default function Count_attendes() {
                  {
                   data.presentNum.length != 0 
                   ?
-                  <div className='col-1'>
-                     <IconButton onClick={()=>CopyData('Present Num' , data.presentNum, 'present' )} color ="primary">
-                        {copy_btn.presentNum_Copy ? <ContentCopyIcon/> : <CheckCircleIcon/>}
+                  <div className='col-1 copyBtn'>
+                     <IconButton size={windowSize[0] < 650 ? "small" : ''} onClick={()=>CopyData('Present Num' , data.presentNum, 'present' )} color ="primary">
+                        {copy_btn.presentNum_Copy ? <ContentCopyIcon fontSize={windowSize[0] < 650 ? "" : ''}/> : <CheckCircleIcon fontSize=''/>}
                     </IconButton>
                   </div>
                   :''

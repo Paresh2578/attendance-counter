@@ -29,6 +29,7 @@ export default function Home() {
   // let auth =false;
   
   let arr = useSelector(state => state.data);
+  arr.reverse();
 
  const [data , setData] = useState(arr);
  const [open_addData , setOpen_addData] = useState(false);
@@ -77,7 +78,8 @@ export default function Home() {
                   data.filter((item) => item.subject.toLowerCase().includes(searchText.toLowerCase()) ||
                     item.semester.toLowerCase().includes(searchText.toLowerCase()) ||
                     item.className.toLowerCase().includes(searchText.toLowerCase()) ||
-                    item.date.toLowerCase().includes(searchText.toLowerCase())
+                    item.date.toLowerCase().includes(searchText.toLowerCase()) ||
+                    item.time.toLowerCase().includes(searchText.toLowerCase())
                   ).map((d, index) => (
                     // 'paresh'
                     // `${d.date}`

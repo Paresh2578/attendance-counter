@@ -55,6 +55,64 @@ body{
     display: none;
 }
 
+
+.viewData_main_box{
+  margin: 2rem 1rem;
+}
+
+.viewAtendance{
+  display: flex;
+  /* width: 100%; */
+}
+.num{
+   font-size: 30px;
+}
+.viewData{
+  font-size: 30px;
+  width: 10px;
+  /* width: 80%; */
+}
+
+@media only screen and (max-width: 1200px) {
+  .viewData{
+    font-size: 20px;
+  }
+  .num{
+    font-size: 20px;
+ }
+}
+
+@media only screen and (max-width: 770px) {
+  .num{
+    width: 6rem;
+    /* width: 80px; */
+    /* text-wrap: wrap; */
+    /* font-size: 10px; */
+ }
+ .viewData_main_box{
+  margin: 2rem 0rem;
+}
+}
+
+@media only screen and (max-width: 575px) {
+ .viewData_main_box{
+  margin: 2rem 10rem;
+  }
+  .viewData{
+    font-size: 15px;
+  }
+  .num{
+    font-size: 15px;
+    width: 80px;
+ }
+}
+
+.copyBtn{
+ /* width: 0px;/ */
+ position: relative;
+ right: 1rem;
+}
+
 /* search bar  */
 
 .search_bar{
@@ -64,6 +122,8 @@ body{
 .search_bar:focus{
     outline: none;
 }
+
+
 
 /* empty page */
 /* body {
@@ -77,11 +137,10 @@ body{
   }
   
   .empty-state {
-    width: 750px;
     margin: 40px auto;
     background: #ffffff;
-    box-shadow: 1px 2px 10px #e1e3ec;
-    border-radius: 4px;
+    /* box-shadow: 1px 2px 10px #e1e3ec;
+    border-radius: 4px; */
   
     &__content {
       padding: 48px;
@@ -90,8 +149,8 @@ body{
       flex-direction: column;
   
       .empty-state__icon {
-        width: 200px;
-        height: 200px;
+        /* width: 100px; */
+        /* height: 100px; */
         display: flex;
         align-items: center;
         border-radius: 200px;
@@ -104,29 +163,56 @@ body{
         }
       }
   
-      .empty-state__message {
-        color: #38a169;
-        font-size: 1.5rem;
-        font-weight: 500;
-        margin-top: 0.85rem;
-      }
+     
   
-      .empty-state__help {
-        color: #a2a5b9;
-        font-size: 0.875rem;
-      }
+     
     }
   }
-  
-  .credit {
-    color: #A2A5B9;
-    font-size: .75rem;
+
+  .empty-state__message {
+    color: #38a169;
+    font-size:1.5rem;
+    font-weight: 500;
+    margin-top: 0.85rem;
     text-align: center;
-    
-    a {
-      color: #444;
-    }
+    word-wrap: break-word;
+    padding: 0px 1rem;
   }
+
+  .empty-state__help {
+    color: #a2a5b9;
+    font-size: 0.875rem;
+    margin: 0px 1rem;
+  }
+
+  
+  @media only screen and (max-width: 540px) {
+    .empty-state__help {
+      font-size: 0.9rem;
+    }
+ }
+
+  @media only screen and (max-width: 490px) {
+    .empty-state__help {
+      font-size: 0.8rem;
+    }
+ }
+
+  @media only screen and (max-width: 430px) {
+    .empty-state__help {
+      font-size: 0.8rem;
+    }
+
+    .empty-state__message{
+      font-size: 1.2rem;
+    }
+
+   .empty_img{
+     width: 150px;
+   }
+ }
+
+
 
   /* auth  */
   .Authentication_body {
@@ -227,4 +313,9 @@ body{
       margin-right: 0.5rem;
     }
  }
+
+
+
+
+ 
   

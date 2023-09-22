@@ -9,6 +9,9 @@ import { useDispatch } from "react-redux";
 import Home from './componets/Home/Home'
 import Count_attendes from './componets/Home/Other opration/Count_attendes'
 import Authentication from './Authentication/Authentication';
+import Developer_detail from './componets/developer detail/Developer_detail';
+import Not_Found from './componets/Not Found/Not_Found'
+import Top_scorl from './componets/top scroll/Top_scorl'
 
 //function
 import { get_data_and_add_redux } from './util/get_data_and_add_redux';
@@ -33,12 +36,16 @@ export default function App() {
     <GoogleOAuthProvider clientId={clientId}>
          <BrowserRouter>
           <Routes>
+                  <Route path='*' element={<Not_Found/>}/>
                   <Route path='/' element={<Home/>}/>
-                  <Route path='/startAttdes/:semester/:subject/:className/:date/:startRoll' element={<Count_attendes/>}></Route>
+                  <Route path='/startAttdes/:semester/:subject/:className/:date/:startRoll/:topic' element={<Count_attendes/>}></Route>
                   <Route path='/Authentication' element={<Authentication/>} />
+                  <Route path='/Developer_detail' element={<Developer_detail/>} />
+                  
                   {/* </Route> */}
 
           </Routes>
+          <Top_scorl/>
       </BrowserRouter>
     </GoogleOAuthProvider>
     

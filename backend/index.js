@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = 4500;
+const PORT = 4500 || process.env.PORT;
 
 app.get('/' , async(req , resp)=>{
     try{

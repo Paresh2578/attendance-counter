@@ -14,6 +14,7 @@ import Edting_data from './Other opration/Edting_data'
 
 //function
 import { update_database } from '../../util/update_database'
+import { SweetAlrt } from '../../util/SweetAlrt'
 
 //mui
 import { Paper  , Fab , styled, IconButton} from '@mui/material'
@@ -33,15 +34,14 @@ export default function ViewAll_List_Data({data , index}) {
    const [Edting_open , setEdting_Open] = useState(false);
 
   const handle_Remove = (_id)=>{
-    console.log(_id)
     action.Remove_data(_id);
      
     redux_data = redux_data.filter((d)=> d._id != _id);
 
     if(update_database(redux_data)){
-       console.log('succesfully remove');
+      SweetAlrt("Remove data " , "success");
     }else{
-      console.log('remove data faild');
+      SweetAlrt("Remove data " , "error");
     }
   }
 
@@ -79,7 +79,7 @@ export default function ViewAll_List_Data({data , index}) {
         <div  className='classNam'> {data.date}  <span className='ps-1'>{data.time}</span></div>
       </div>
       <div style={{marginRight :'auto'}} className='ms-3'>
-        <IconButton   className='bg-primary text-light mb-2 shadow' size= {windowSize[0] < 500 ? "small" : ''} onClick={()=>{setEdting_Open(true) ; console.log('done')}}>
+        <IconButton   className='bg-primary text-light mb-2 shadow' size= {windowSize[0] < 500 ? "small" : ''} onClick={()=>{setEdting_Open(true)}}>
             <EditIcon fontSize={windowSize[0] < 500 ? "small" : ''} />
         </IconButton>
         <IconButton size= {windowSize[0] < 500 ? "small" : ''} className='bg-danger text-light shadow' onClick={()=>handle_Remove(data._id)}>

@@ -28,10 +28,11 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseUserMenu = (setting) => {
-    console.log(setting);
     if(setting === 'Log out'){
        localStorage.clear('auth');
        navigate('/Authentication');
+    }else if(setting == 'Developed by'){
+      navigate('/Developer_detail');
     }
     setAnchorElUser(null);
   };
@@ -45,6 +46,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
+            onClick={()=>navigate('/')}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -63,7 +65,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            onClick={()=>navigate('/')}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -72,6 +74,7 @@ function ResponsiveAppBar() {
               fontWeight: 700,
               letterSpacing: '0.3rem',
               color: 'inherit',
+              fontSize:'18px',
               textDecoration: 'none',
             }}
           >
@@ -81,7 +84,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }} style={{marginLeft : 'auto'}}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={auth[0].profile} />
+                <Avatar alt="Remy Sharp" src={auth ? auth[0].profile : ''} />
               </IconButton>
             </Tooltip>
             <Menu

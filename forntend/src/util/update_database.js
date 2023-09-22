@@ -1,7 +1,10 @@
 import { URL } from "./URL";
+//function
+import { SweetAlrt } from "./SweetAlrt";
 
 //auth
 const auth = JSON.parse(localStorage.getItem('auth'));
+
 
 export const update_database = async(Redux_data)=>{
     try{
@@ -15,6 +18,7 @@ export const update_database = async(Redux_data)=>{
 
         return true;
     }catch(error){
+      SweetAlrt("add api " , "error");
       console.log('add data api error : ' + error);
 
       return false;

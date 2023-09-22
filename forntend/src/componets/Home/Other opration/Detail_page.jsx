@@ -61,6 +61,7 @@ export default function Detail_page({open , setOpen , data}) {
           <div className='mb-2 subjectName'><span className='h4 child_style'>ClassName : </span> {data.className}</div>
           <div className='mb-2 subjectName'><span className='h4 child_style'>Absent : </span> { data.absentNum.map(i=>`${i} , `)}</div>
           <div className='mb-2 subjectName'><span className='h4 child_style'>Present : </span> {data.presentNum.map(i=>`${i} , `)} </div>
+          <div className='mb-2 subjectName'><span className='h4 child_style'>Topic : </span> {data.topic} </div>
           {/* <div className='mb-2' ><span className='h4 child_style'>Time : </span> {data.time}</div>  */}
         </div>
 

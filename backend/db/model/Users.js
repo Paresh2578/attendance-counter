@@ -26,7 +26,8 @@ const UserSchema = new mongoose.Schema({
             date :{type : String , required : true} ,
             absentNum : {type : Array} ,
             presentNum :{type : Array },
-            time : {type : String , required: true}
+            time : {type : String , required: true},
+            topic : {type : String , required: true}
          }
     ]
 })

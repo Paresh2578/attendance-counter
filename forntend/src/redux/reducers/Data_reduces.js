@@ -11,7 +11,6 @@ const reducer = (state = [] , action)=>{
 
     }else if(action.type == 'UPDATE'){
         state[action.payload.index] = action.payload.newData;
-        // console.log(state);
          let data = action.payload.newData;
          const updatedArray = [];
          state.map((item)=>{
@@ -21,8 +20,7 @@ const reducer = (state = [] , action)=>{
                 item.className = data.className;
                 item.date = data.date;
                 item.time = formetTime(new Date());
-                // item.absentNum = data.absentNum;
-                // item.presentNum = data.presentNum;
+                item.topic = data.topic;
 
                 if(!Array.isArray(data.absentNum)){
                     item.absentNum = data.absentNum.split(',');

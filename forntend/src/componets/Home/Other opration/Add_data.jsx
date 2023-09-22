@@ -3,20 +3,25 @@ import { useNavigate } from 'react-router-dom';
 
 
 //mui
-import {Button  , TextField,  Dialog  , DialogActions ,  DialogContent ,  DialogContentText , DialogTitle, IconButton } from '@mui/material';
+import {Button  , Alert , TextField,  Dialog  , DialogActions ,  DialogContent ,  DialogContentText , DialogTitle, IconButton } from '@mui/material';
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
+//constom function
+import { FromentDate } from '../../../util/FormentDate';
+
+
 
 //main function
 export default function Add_data({open_addData , setOpen_addData}) {
   const navigate = useNavigate();
 
-  const [data , setData] =useState({semester : '' , Subject : "" , Class : "" , date : "" , startRoll : 0})
+  const [data , setData] =useState({semester : '' , Subject : "" , Class : "" , date : "" , startRoll : 0 , topic : "''"});
   const [date , setDate] = useState(); 
+
 
   //all alert
   const [semesterAlert , setSemesterAlert] = useState(false);
@@ -24,6 +29,7 @@ export default function Add_data({open_addData , setOpen_addData}) {
   const [classAlert , setClassAlert] = useState(false);
   const [dataAlert , setDateAlert] = useState(false);
   const [startRollAlrt , setStartRollAtrt] = useState(false);
+  const [properDataFil , setProperDataFil] = useState(false);
 
   const handleClose = () => {
     setOpen_addData(false);
@@ -59,18 +65,21 @@ export default function Add_data({open_addData , setOpen_addData}) {
     }
 
     //complet all filed data
-    if(!semesterAlert && !subjectAlert && !classAlert && !date){
-      if(data.semester != 0 && data.semester >0 && data.Subject.length != 0 && data.Class.length && data.date.length != 0){
+    if(!semesterAlert && !subjectAlert && !classAlert && !date && !startRollAlrt){
+      if(data.semester != 0 && data.semester >0 && data.Subject.length != 0 && data.Class.length && data.date.length != 0 && data.startRoll >0){
 
         //change date formnet -> dd/mm/yyyy to dd-mm-yyyy
         let date_Arr = data.date.split('/');
         let changeDateForment = date_Arr[0] + '-' + date_Arr[1] + '-' + date_Arr[2];
-       
-        console.log(data.date.charAt(data.date.length - 5))
       
-        navigate(`/startAttdes/${data.semester}/${data.Subject}/${data.Class}/${changeDateForment}/${data.startRoll}`)
+        navigate(`/startAttdes/${data.semester}/${data.Subject}/${data.Class}/${changeDateForment}/${data.startRoll}/${data.topic}`)
+      }else{
+        setProperDataFil(false);
       }
+    }else{
+        setProperDataFil(true);
     }
+
   }
 
   //enter key handle
@@ -91,25 +100,28 @@ export default function Add_data({open_addData , setOpen_addData}) {
         <DialogTitle id="alert-dialog-title">
           {"Start the New Class Attendance"}
         </DialogTitle>
+        {
+          properDataFil && <Alert severity="error" className='ms-4 me-4'>proper data to fill please!</Alert>
+        }
         <DialogContent>
             <div className='mt-2'>
                {
                 semesterAlert ? 
-                <TextField error helperText='Invaild' type='Number'  onChange={(e)=>setData({...data ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" />
+                <TextField error helperText='Invaild' type='Number'  onChange={(e)=>setData({...data ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" required />
                  :
-                <TextField type='Number'  onChange={(e)=>setData({...data ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" /> 
+                <TextField type='Number'  onChange={(e)=>setData({...data ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" required /> 
                }
                {
                 subjectAlert ? 
-                <TextField error helperText='Invaild' style={{width : '100%'}} onChange={(e)=>setData({...data ,Subject : e.target.value })} className='mb-3' id="outlined-basic" label="Subject" variant="outlined" />
+                <TextField error helperText='Invaild' style={{width : '100%'}} onChange={(e)=>setData({...data ,Subject : e.target.value })} className='mb-3' id="outlined-basic" label="Subject" variant="outlined" required />
                 :
-                <TextField style={{width : '100%'}} onChange={(e)=>setData({...data ,Subject : e.target.value })} className='mb-3' id="outlined-basic" label="Subject" variant="outlined" />
+                <TextField style={{width : '100%'}} onChange={(e)=>setData({...data ,Subject : e.target.value })} className='mb-3' id="outlined-basic" label="Subject" variant="outlined" required />
                 }
                {
                 classAlert ? 
-                <TextField error helperText='Invaild' style={{width : '100%'}}  onChange={(e)=>setData({...data ,Class : e.target.value })}  className='mb-1' id="outlined-basic" label="Class" variant="outlined" />
+                <TextField error helperText='Invaild' style={{width : '100%'}}  onChange={(e)=>setData({...data ,Class : e.target.value })}  className='mb-1' id="outlined-basic" label="Class" variant="outlined"  />
                  :
-                <TextField style={{width : '100%'}}  onChange={(e)=>setData({...data ,Class : e.target.value })}  className='mb-1' id="outlined-basic" label="Class" variant="outlined" />
+                <TextField style={{width : '100%'}}  onChange={(e)=>setData({...data ,Class : e.target.value })}  className='mb-1' id="outlined-basic" label="Class" variant="outlined"  />
                 }
                
                  <div    className={ dataAlert ? 'border border-2 border-danger mt-2 mb-3' : 'mb-3'}>
@@ -123,17 +135,18 @@ export default function Add_data({open_addData , setOpen_addData}) {
                             ]}
                         >
                             <DemoItem label="Date">
-                             <MobileDatePicker value={date} onChange={(e)=>setData({...data , date : e.$d.toLocaleDateString()})}/>
+                             <MobileDatePicker value={date} onChange={(e)=>setData({...data , date : FromentDate(e.$d)})}/>
                             </DemoItem>
                         </DemoContainer>
                     </LocalizationProvider>
                  </div>
                  {
                    startRollAlrt ? 
-                  <TextField error helperText='Invaild' type='Number'  onChange={(e)=>setData({...data ,startRoll : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Start Roll" variant="outlined" />
+                  <TextField error helperText='Invaild' type='Number'  onChange={(e)=>setData({...data ,startRoll : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Start Roll" variant="outlined" required />
                    :
-                  <TextField type='Number'  onChange={(e)=>setData({...data ,startRoll : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Start Roll" variant="outlined" /> 
+                  <TextField type='Number'  onChange={(e)=>setData({...data ,startRoll : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Start Roll" variant="outlined" required /> 
                 }
+                 <TextField type='text'  onChange={(e)=>setData({...data ,topic : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Topic (optional)" variant="outlined"  /> 
             </div>
         </DialogContent>
         <DialogActions>

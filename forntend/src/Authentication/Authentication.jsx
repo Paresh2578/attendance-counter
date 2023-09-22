@@ -6,11 +6,16 @@ import jwt_decode from "jwt-decode";
 //URL
 import { URL } from '../util/URL';
 
+//contom function
+import { SweetAlrt } from '../util/SweetAlrt';
+
 export default function Authentication() {
   const navigate = useNavigate();
 
     const on_success = (res)=>{
         let data = jwt_decode(res.credential);
+
+
 
         data = {
           name : data.name,
@@ -18,13 +23,14 @@ export default function Authentication() {
           password : data.sub,
           profile : data.picture
         }
+        console.log(data);
 
         check_allredy_login(data);
         
-        console.log(data);
     }
 
     const on_error = (res)=>{
+      SweetAlrt("log in" , "error");
         console.log(res);
     }
 
@@ -33,8 +39,6 @@ export default function Authentication() {
            let result = await fetch(`${URL}/user/find/${data.email}/${data.password}`);
            result = await result.json();
 
-           console.log(result);
-           
            if(result.length == 0){
              sign_up_user(data);
            }else{
@@ -42,6 +46,7 @@ export default function Authentication() {
            }
 
       }catch(error){
+        SweetAlrt("log in" , "error");
        console.log('check allredy user api error : ' + error);
       }
  }
@@ -55,21 +60,20 @@ export default function Authentication() {
               'content-type' : 'application/json'
             }
          })
-         console.log(data);
           data = [data];
-          console.log(data);
           localStorage.setItem('auth' , JSON.stringify(data));
+          SweetAlrt("Sign in" , "success")
           navigate('/');
        }catch(error){
+        SweetAlrt("Signin " , "error")
         console.log('register user api error : ' + error);
        }
-      console.log('sign in');
     }
 
     const login_user = (result) =>{
        localStorage.setItem('auth' , JSON.stringify(result));
+       SweetAlrt("Log in" , "success")
        navigate('/');
-       console.log('log in');
     }
 
    

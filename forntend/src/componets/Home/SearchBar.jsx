@@ -23,7 +23,7 @@ export default function SearchBar({setSearchText}) {
   return (
       <MainBox   style={{display: 'flex' ,justifyContent: 'center' ,  alignItems: 'center'}}>
         <div className='row container shadow  rounded-4' style={{backgroundColor : '#FFF' , border:'2px solid #0d6efd' ,  height:'7vh' , display: 'flex' ,justifyContent: 'center' ,  alignItems: 'center'}}>
-          <div className='col-1 ' style={{width : '3%' , marginLeft : '-1rem'}} >
+          <div className='col-1 ' style={{width : '3%' , marginLeft : '-1rem' , marginRight:'0.3rem'}} >
             <SearchIcon/>
           </div>
           <div className='col '  >

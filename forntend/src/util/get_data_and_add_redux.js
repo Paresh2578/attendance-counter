@@ -4,6 +4,9 @@ import { URL } from "./URL"
 import { bindActionCreators } from "redux";
 import { dataActions } from "../redux";
 
+//function
+import { SweetAlrt } from "./SweetAlrt";
+
 
 
 export const get_data_and_add_redux = async(email, password , dispatch)=>{
@@ -20,6 +23,7 @@ export const get_data_and_add_redux = async(email, password , dispatch)=>{
      
 
    }catch(error){
+    SweetAlrt("get data " , "error");
     console.log('get data and add redux api error : ' , error);
    }
 }
