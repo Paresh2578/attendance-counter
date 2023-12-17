@@ -17,7 +17,7 @@ app.get('/' , async(req , resp)=>{
     try{
         resp.send('done');
     }catch(error){
-        console.log(error);
+        resp.status(500).json(error);
     }
 })
 
@@ -28,7 +28,8 @@ app.post('/user/register' , async (req , resp)=>{
         resp.send(result);
         console.log(result);
     }catch(error){
-        console.log('user register api error : ' + error);
+        // console.log('user register api error : ' + error);
+        resp.status(500).json(error);
     }
 })
 
@@ -40,7 +41,8 @@ app.put('/user/update/:email' , async (req , resp)=>{
             )
           resp.send(result);
     }catch(error){
-        console.log('update data api error : ' + error);
+        // console.log('update data api error : ' + error);
+        resp.status(500).json(error);
     }
 })
 
@@ -50,7 +52,8 @@ app.get('/user/find/:email/:password' , async(req , resp)=>{
          let result = await Users.find({email : req.params.email , password : req.params.password })
          resp.send(result);
     }catch(error){
-        console.log('find user api error : ' + error);
+        // console.log('find user api error : ' + error);
+        resp.status(500).json(error);
     }
 })
 
@@ -58,7 +61,8 @@ app.delete('/user/data/delete/:_id' , async(req , resp)=>{
     try{
          let  result = await Users.deleteOne()
     }catch(error){
-        console.log('deleter data api error : '+ error);
+        // console.log('deleter data api error : '+ error);
+        resp.status(500).json(error);
     }
 })
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 //mui
-import {Button  , Alert , TextField,  Dialog  , DialogActions ,  DialogContent ,  DialogContentText , DialogTitle, IconButton } from '@mui/material';
+import {Button  , FormControl, MenuItem , InputLabel , Select  , Alert , TextField,  Dialog  , DialogActions ,  DialogContent ,  DialogContentText , DialogTitle, IconButton } from '@mui/material';
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -19,12 +19,12 @@ import { FromentDate } from '../../../util/FormentDate';
 export default function Add_data({open_addData , setOpen_addData}) {
   const navigate = useNavigate();
 
-  const [data , setData] =useState({semester : '' , Subject : "" , Class : "" , date : "" , startRoll : 0 , topic : "''"});
+  const [data , setData] =useState({semester : 1 , Subject : "" , Class : "" , date : "" , startRoll : 0 , topic : "''"});
   const [date , setDate] = useState(); 
 
 
   //all alert
-  const [semesterAlert , setSemesterAlert] = useState(false);
+  // const [semesterAlert , setSemesterAlert] = useState(false);
   const [subjectAlert , setSubjectAlert] = useState(false);
   const [classAlert , setClassAlert] = useState(false);
   const [dataAlert , setDateAlert] = useState(false);
@@ -36,11 +36,11 @@ export default function Add_data({open_addData , setOpen_addData}) {
   };
 
   const handleSaveData = ()=>{
-    if(data.semester.length == 0 || data.semester <= 0){
-      setSemesterAlert(true);
-    }else{
-      setSemesterAlert(false);
-    }
+    // if(data.semester.length == 0 || data.semester <= 0){
+    //   setSemesterAlert(true);
+    // }else{
+    //   setSemesterAlert(false);
+    // }
 
     if(data.Subject.length == 0){
       setSubjectAlert(true);
@@ -65,13 +65,13 @@ export default function Add_data({open_addData , setOpen_addData}) {
     }
 
     //complet all filed data
-    if(!semesterAlert && !subjectAlert && !classAlert && !date && !startRollAlrt){
-      if(data.semester != 0 && data.semester >0 && data.Subject.length != 0 && data.Class.length && data.date.length != 0 && data.startRoll >0){
+    if( !subjectAlert && !classAlert && !date && !startRollAlrt){
+      if( data.Subject.length != 0 && data.Class.length && data.date.length != 0 && data.startRoll >0){
 
         //change date formnet -> dd/mm/yyyy to dd-mm-yyyy
         let date_Arr = data.date.split('/');
         let changeDateForment = date_Arr[0] + '-' + date_Arr[1] + '-' + date_Arr[2];
-      
+
         navigate(`/startAttdes/${data.semester}/${data.Subject}/${data.Class}/${changeDateForment}/${data.startRoll}/${data.topic}`)
       }else{
         setProperDataFil(false);
@@ -105,12 +105,31 @@ export default function Add_data({open_addData , setOpen_addData}) {
         }
         <DialogContent>
             <div className='mt-2'>
-               {
+               {/* {
                 semesterAlert ? 
                 <TextField error helperText='Invaild' type='Number'  onChange={(e)=>setData({...data ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" required />
                  :
                 <TextField type='Number'  onChange={(e)=>setData({...data ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" required /> 
-               }
+               } */}
+                <FormControl className='mb-3' fullWidth>
+                  <InputLabel id="demo-simple-select-label" required>semester</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={data.semester}
+                    label="Semester"
+                    onChange={(e)=>setData({...data ,semester : e.target.value })} 
+                  >
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={6}>6</MenuItem>
+                    <MenuItem value={7}>7</MenuItem>
+                    <MenuItem value={8}>8</MenuItem>
+                  </Select>
+                </FormControl>
                {
                 subjectAlert ? 
                 <TextField error helperText='Invaild' style={{width : '100%'}} onChange={(e)=>setData({...data ,Subject : e.target.value })} className='mb-3' id="outlined-basic" label="Subject" variant="outlined" required />

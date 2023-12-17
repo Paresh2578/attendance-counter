@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
@@ -9,13 +9,16 @@ import { URL } from '../util/URL';
 //contom function
 import { SweetAlrt } from '../util/SweetAlrt';
 
+//componets
+import Loder from '../componets/loder/Loder'
+
 export default function Authentication() {
   const navigate = useNavigate();
+  const [loder , setLoder] = useState(false);
 
     const on_success = (res)=>{
+       setLoder(true);
         let data = jwt_decode(res.credential);
-
-
 
         data = {
           name : data.name,
@@ -26,7 +29,6 @@ export default function Authentication() {
         console.log(data);
 
         check_allredy_login(data);
-        
     }
 
     const on_error = (res)=>{
@@ -44,7 +46,7 @@ export default function Authentication() {
            }else{
              login_user(result);
            }
-
+         
       }catch(error){
         SweetAlrt("log in" , "error");
        console.log('check allredy user api error : ' + error);
@@ -63,6 +65,7 @@ export default function Authentication() {
           data = [data];
           localStorage.setItem('auth' , JSON.stringify(data));
           SweetAlrt("Sign in" , "success")
+          setLoder(false);
           navigate('/');
        }catch(error){
         SweetAlrt("Signin " , "error")
@@ -72,7 +75,8 @@ export default function Authentication() {
 
     const login_user = (result) =>{
        localStorage.setItem('auth' , JSON.stringify(result));
-       SweetAlrt("Log in" , "success")
+       SweetAlrt("Log in" , "success");
+       setLoder(false);
        navigate('/');
     }
 
@@ -80,12 +84,14 @@ export default function Authentication() {
 
   return (
     <div className='Authentication_body'>
-        <div className="login-form">
+      {loder && <Loder/>}
+
+       {!loder &&  <div className="login-form">
         <GoogleLogin
             onSuccess={(res)=>on_success(res)}
             onError={(res) =>on_error(res)}
           />  
-        </div>
+        </div>}
     </div>
   )
 }

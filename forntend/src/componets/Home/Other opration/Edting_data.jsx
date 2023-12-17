@@ -15,7 +15,7 @@ import { SweetAlrt } from '../../../util/SweetAlrt';
 
 
 //mui
-import {Button  ,Alert , TextField,  Dialog  , DialogActions ,  DialogContent ,  DialogContentText , DialogTitle, IconButton } from '@mui/material';
+import {Button, FormControl , InputLabel , Select , MenuItem  ,Alert , TextField,  Dialog  , DialogActions ,  DialogContent ,  DialogContentText , DialogTitle, IconButton } from '@mui/material';
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -35,7 +35,7 @@ export default function Edting_data({open , setOpen , data , index}) {
   const [date , setDate] = useState(); 
 
   //all alert
-  const [semesterAlert , setSemesterAlert] = useState(false);
+  // const [semesterAlert , setSemesterAlert] = useState(false);
   const [subjectAlert , setsubjectAlert] = useState(false);
   const [classAlert , setclassNameAlert] = useState(false);
   const [dataAlert , setDateAlert] = useState(false);
@@ -56,11 +56,11 @@ export default function Edting_data({open , setOpen , data , index}) {
 
   const handleSaveData = ()=>{
    
-    if(currData.semester.length == 0 || currData.semester <= 0){
-      setSemesterAlert(true);
-    }else{
-      setSemesterAlert(false);
-    }
+    // if(currData.semester.length == 0 || currData.semester <= 0){
+    //   setSemesterAlert(true);
+    // }else{
+    //   setSemesterAlert(false);
+    // }
 
     if(currData.subject.length == 0){
       setsubjectAlert(true);
@@ -79,8 +79,8 @@ export default function Edting_data({open , setOpen , data , index}) {
     }
 
     //complet all filed data
-    if(!semesterAlert && !subjectAlert && !classAlert && !date){
-      if(currData.semester != 0 && currData.semester > 0 && currData.subject.length != 0 && currData.className.length && currData.date.length != 0){
+    if(!subjectAlert && !classAlert && !date){
+      if( currData.subject.length != 0 && currData.className.length && currData.date.length != 0){
 
         action.Update_data(index , currData)
         
@@ -123,18 +123,40 @@ export default function Edting_data({open , setOpen , data , index}) {
         }
         <DialogContent>
             <div className='mt-2'>
-               {
+               {/* {
                 semesterAlert ? 
                 <TextField error helperText='Invaild' type='Number' value={currData.semester} onChange={(e)=>setCurrData({...currData ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" required />
                  :
                 <TextField type='Number' value={currData.semester} onChange={(e)=>setCurrData({...currData ,semester : e.target.value })} style={{width : '100%'}}  className='mb-3' id="outlined-basic" label="Semester" variant="outlined" required /> 
-               }
+               } */}
+
+                <FormControl className='mb-3' fullWidth>
+                  <InputLabel id="demo-simple-select-label" required>semester</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={currData.semester}
+                    label="Semester"
+                    onChange={(e)=>setCurrData({...currData ,semester : e.target.value })} 
+                  >
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={6}>6</MenuItem>
+                    <MenuItem value={7}>7</MenuItem>
+                    <MenuItem value={8}>8</MenuItem>
+                  </Select>
+                </FormControl>
+
                {
                 subjectAlert ? 
                 <TextField error helperText='Invaild' value={currData.subject} style={{width : '100%'}} onChange={(e)=>setCurrData({...currData ,subject : e.target.value })} className='mb-3' id="outlined-basic" label="subject" variant="outlined" required />
                 :
                 <TextField style={{width : '100%'}} value={currData.subject} onChange={(e)=>setCurrData({...currData ,subject : e.target.value })} className='mb-3' id="outlined-basic" label="subject" variant="outlined" required />
                 }
+
                {
                 classAlert ? 
                 <TextField error helperText='Invaild' value={currData.className} style={{width : '100%'}}  onChange={(e)=>setCurrData({...currData ,className : e.target.value })}  className='mb-1' id="outlined-basic" label="className" variant="outlined"  />

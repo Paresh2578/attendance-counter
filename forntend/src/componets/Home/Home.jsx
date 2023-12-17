@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 //Redux
 import { useDispatch } from "react-redux";
@@ -24,6 +25,7 @@ import Authentication from '../../Authentication/Authentication';
 
 
 export default function Home() {
+  const navigate = useNavigate();
 
   let auth = localStorage.getItem('auth');
   // let auth =false;
@@ -37,7 +39,9 @@ export default function Home() {
 
   useEffect(()=>{
      setData(arr);
-    
+     if(!auth){
+      navigate('/Authentication')
+     }
   },[arr])
 
     ////find scrren width

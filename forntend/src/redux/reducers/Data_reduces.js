@@ -10,7 +10,6 @@ const reducer = (state = [] , action)=>{
         return state;
 
     }else if(action.type == 'UPDATE'){
-        state[action.payload.index] = action.payload.newData;
          let data = action.payload.newData;
          const updatedArray = [];
          state.map((item)=>{
@@ -32,6 +31,8 @@ const reducer = (state = [] , action)=>{
              }
              updatedArray.push(item);
          })
+         console.log(updatedArray);
+         console.log(state);
         return updatedArray;
     }
     else{
