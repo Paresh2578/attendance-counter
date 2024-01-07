@@ -45,7 +45,7 @@ export default function ViewAll_List_Data({data , index}) {
     }
   }
 
-  ////find scrren width
+  ////find screen width
    const [windowSize, setWindowSize] = useState([
     window.innerWidth,
   ]);

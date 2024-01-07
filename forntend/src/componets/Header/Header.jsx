@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 //mui
 import {AppBar , Box , Toolbar,IconButton ,Typography , Menu , Container  , Avatar  , Button   ,Tooltip , MenuItem} from '@mui/material';
-import AdbIcon from '@mui/icons-material/Adb';
-import MenuIcon from '@mui/icons-material/Menu';
-// const pages = [];
 const settings = ['Log out', 'Developed by'];
 const auth = JSON.parse(localStorage.getItem('auth'));
 

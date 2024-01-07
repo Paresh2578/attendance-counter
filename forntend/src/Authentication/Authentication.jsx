@@ -6,14 +6,20 @@ import jwt_decode from "jwt-decode";
 //URL
 import { URL } from '../util/URL';
 
+//Redux
+import { useDispatch } from "react-redux";
+
 //contom function
 import { SweetAlrt } from '../util/SweetAlrt';
+import {get_data_and_add_redux} from '../util/get_data_and_add_redux';
 
 //componets
 import Loder from '../componets/loder/Loder'
 
 export default function Authentication() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [loder , setLoder] = useState(false);
 
     const on_success = (res)=>{
@@ -26,8 +32,6 @@ export default function Authentication() {
           password : data.sub,
           profile : data.picture
         }
-        console.log(data);
-
         check_allredy_login(data);
     }
 
@@ -75,6 +79,10 @@ export default function Authentication() {
 
     const login_user = (result) =>{
        localStorage.setItem('auth' , JSON.stringify(result));
+
+       console.log(result);
+         
+        get_data_and_add_redux(result[0].email , result[0].password  , dispatch);
        SweetAlrt("Log in" , "success");
        setLoder(false);
        navigate('/');
